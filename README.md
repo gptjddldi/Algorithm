@@ -38,3 +38,15 @@
     cout << oss.string();
     ```
 
+### Three Point Triangle Area
+
+  ```
+  A(x1,y1) B(x2,y2) C(x3,y3)
+  S = 1/2|(x1(y2-y3) + x2(y3-y1) + x3(y1-y2))|
+  ```
+
+### Integral Image (leet 1314)
+모르겠다 설명조차도 ㅋㅋㅠㅠ dp 사용?
+```
+https://jangjy.tistory.com/32
+```
