@@ -50,3 +50,10 @@
 ```
 https://jangjy.tistory.com/32
 ```
+
+### DP(Dynamic Programming)
+
+문제를 해결하기 위한 점화식을 찾아낸 후 점화식의 첫째 항부터 차례로 구해나가는 것이다.
+
+- BOJ 1463
+- Leec 1027
