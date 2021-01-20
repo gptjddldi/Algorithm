@@ -57,3 +57,67 @@ https://jangjy.tistory.com/32
 
 - BOJ 1463
 - Leec 1027
+- BOJ 1149
+- BOJ 2579
+
+### Prefix Sum (구간 합)
+
+```
+int arr[10] = {0, 2, 3, 4, 5, 6, 7, 8, 9} 배열이 존재한다.
+
+이때 a에서 b의 구간 합을 요구하는 쿼리 2천만개가 들어온다.
+
+이러한 문제에 대해 어떻게 해결 할 것인가?
+```
+
+```
+일반 풀이
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+  int arr[10] = { 0,1,2,3,4,5,6,7,8,9 }
+  int N;
+  cin>>N;
+  for(int i = 0; i< N; i++){
+    int a, b;
+    cin>>a>>b;
+    int sum = 0;
+    for(int j = a; j <= b; j++)
+      sum += arr[j];
+    cout << sum;
+  }
+}
+
+-> 배열의 길이가 n 이면 복잡도 O(n^2)
+```
+
+```
+//Prefix Sum Alogirthm
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+  int arr[10] = { 0,1,2,3,4,5,6,7,8,9 }
+  int sum[10] = {0,}
+  int N;
+  cin>>N;
+ for (int i = 0; i < 10; i++)
+  {
+    if (i == 0)
+      sum[i] = arr[i];
+  else
+      sum[i] = sum[i - 1] + arr[i];
+  }
+for(int i = 0; i< N; i++){
+    int a, b;
+    cin>>a>>b;
+    int sum = 0;
+
+    cout << sum[b]-sum[a-1];
+  }
+}
+-> 복잡도 O(n)
+```
