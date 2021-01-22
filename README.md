@@ -122,4 +122,7 @@ for(int i = 0; i< N; i++){
 -> 복잡도 O(n)
 ```
 
-### Greedy
+### std::map
+
+  - 중복을 허용하지 않는 (key,value) 쌍으로 이루어진 hash map
+  
