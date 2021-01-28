@@ -204,11 +204,11 @@ for(int i=0; i<e; i++) {
   // with STL
   vector<int> adj[10];
   int v, e;
-  cint>>v>>e;
+  cin>>v>>e;
   for(int i=0; i<e; i++){
     int u, v;
     cin >> u >> v;
-    adj[i].push_back(v);
+    adj[u].push_back(v);
   }
 
   // without STL
@@ -234,7 +234,7 @@ for(int i=0; i<e; i++) {
   }
 ```
 
-연결 그래프에서의 순회 (DFS)
+연결 그래프에서의 순회 (BFS)
 ```
 vector <int> ajj[10];
 bool vis[10];
@@ -255,7 +255,39 @@ void bfs() {
 }
 ```
 
-연결 그래프에서의 순회 (BFS)
+연결 그래프에서의 순회 (DFS, 비재귀)
+```
+vector<int> adj[10];
+bool vis[10];
+void dfs() {
+  stack<int> s;
+  s.push(1);
+  vis[1] = true;
+  while(!s.empty()) {
+    int cur = s.top();
+    s.pop()
+    cout << cur << ' ';
+    for(int i= 0; i < adj[cur].size(); i++) {
+      int nxt = adj[cur][i];
+      if(vis[nxt]) continue;
+      s.push(nxt);
+      vis[nxt] = true;
+    }
+  }
+}
 ```
 
+연결 그래프에서의 순회 (DFS, 재귀)
+```
+vector<int> adj[10];
+bool vis[10];
+void dfs(int cur) {
+  cout<< cur <<' ' ;
+  for(int i= 0; i < adj[cur].size(); i++) {
+    int nxt = adj[cur][i];
+    if(vis[nxt]) continue;
+    vis[nxt] = true;
+    dfs(nxt);
+  }
+}
 ```
