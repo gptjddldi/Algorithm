@@ -2,12 +2,6 @@
 
 ##### 알고리즘 문제를 풀면서 나오는 자료구조, 알고리즘을 정리하겠다.
 
-
-### 1. Stack, Queue
-
-### 2.
-
-
 ### stringstream (leet 824)
 - istringstream
   ```
@@ -289,5 +283,33 @@ void dfs(int cur) {
     vis[nxt] = true;
     dfs(nxt);
   }
+}
+```
+
+### BackTracking
+ 
+ - 현재 상태에서 가능한 모든 후보군을 탐색하는 알고리즘
+
+```
+// k : 현 위치, m : end point
+void func(int k) {
+  if(k==m) {
+    for (int i = 0; i < m; i++)
+	{
+		cout<<arr[i]<<' ';
+		cout<< '\n';
+		return ;
+	}
+  }
+  for (int i = 1; i <= n; i++)
+  {
+	  if(isused[i]) {
+		  arr[k] = i;
+		  isused[i] = 1;
+		  func(k-1);
+		  isused[i]=0
+	  }
+  }
+  
 }
 ```
