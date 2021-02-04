@@ -313,3 +313,20 @@ void func(int k) {
   
 }
 ```
+
+### 소수 찾기 (Sieve of Eratosthenes)
+
+에라토스테네스의 체 : 1 부터 N 까지의 자연수 중 모든 소수를 찾는 알고리즘
+
+- 길이 N+1 의 배열을 만든다 bool arr[N+1]
+- 2 부터 시작해 arr[i] 가 false 라면 i 의 배수는 모두 true
+- N+1 까지 탐색한 뒤 arr[i] = false 인 i 를 리턴하면 된다.
+```
+int N = 100;
+bool arr[N+1]; arr[1] = 1
+for(int i=2; i<=N; i++){
+  if(!arr[i])
+    for(int j=2*i i*j <=N; j+=i)
+      arr[j] = 1;
+}
+```
