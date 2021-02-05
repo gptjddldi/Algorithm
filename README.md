@@ -330,3 +330,21 @@ for(int i=2; i<=N; i++){
       arr[j] = 1;
 }
 ```
+
+### 사전순 순열 (Lexicographical Permutation)
+
+[Lexicographical permutation](https://www.nayuki.io/page/next-lexicographical-permutation-algorithm)
+
+  1. 가장 긴 증가하지 않는 배열의 최대 인덱스 찾기
+  (arr[i-1] < arr[i]) 
+  2. i 이상의 인덱스에서 arr[j] >= arr[i-1] 을 만족하는 가장 큰 j 찾기
+  3. swap arr[j], arr[i-1]
+  4. arr[i] 로 시작하는 배열을 반대로 하기.
+
+  ```
+  arr = [0, 1, 2, 5, 3, 3, 0]
+  1. i = 3 (arr[3] = 5, arr[2] = 2)
+  2. j = 5 (arr[j] = 3)
+  3. swap arr[5], arr[2] => arr = [0, 1, 3, 5, 3 ,2, 0]
+  4. arr = [0, 1, 3, 0, 2, 3, 5] : next permutation of arr
+  ```
