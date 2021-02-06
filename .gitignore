@@ -1,5 +1,5 @@
 /.dist
 /.vscode
 test.*
-temp
+temp*
 *.exe
