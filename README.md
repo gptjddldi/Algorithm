@@ -348,3 +348,44 @@ for(int i=2; i<=N; i++){
   3. swap arr[5], arr[2] => arr = [0, 1, 3, 5, 3 ,2, 0]
   4. arr = [0, 1, 3, 0, 2, 3, 5] : next permutation of arr
   ```
+
+### LIS (Longest Increasing Subsequence)
+
+  1. 기존의 dp 를 이용한 O(n^2)
+  2. 이분탐색을 이용한 O(NlgN) 
+  [최적화된 LIS](https://jins-dev.tistory.com/entry/최적화된-LISLongest-Increasing-Subsequence-알고리즘과-해-찾기)
+
+```
+int findLIS(int n){
+    for(int i=0; i<n; i++){
+        if(i==0 || A[i] > lis[lisCnt-1]){
+            trace[A[i]] = lisCnt;
+            lis[lisCnt++] = A[i];
+        } else{
+            int start = 0, end = lisCnt;
+            int idx = lisCnt;
+            while(start<end){
+                int mid = (start+end) / 2;
+                if(lis[mid] >= A[i]) {
+                    idx = min(idx, mid);
+                    end = mid;
+                } else {
+                    start = mid+1;
+                }
+            }
+            lis[idx] = A[i];
+            trace[A[i]] = idx;
+        }
+    }
+    // trace 배열에서 가장 나중을 꺼내면 됨
+    int cur = lisCnt-1;
+    for(int i= n-1; i>=0; i--){
+        if(trace[A[i]] == cur) {
+            lis[cur] = A[i];
+            cur--;
+        }
+    }
+    return lisCnt;
+}
+```
+너무 어려운뎅?
