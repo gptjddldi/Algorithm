@@ -388,4 +388,45 @@ int findLIS(int n){
     return lisCnt;
 }
 ```
-너무 어려운뎅?
+
+### Bit Masking (비트 마스킹)
+
+  - BOJ 2098. 외판원 순회
+
+  N 이 작을 때 dp로 풀 수 있음
+  dp[i][j] 현재 i 위치에 있고 j 에 속한 마을들을 방문한 상태
+  j 에는 여러 마을이 속해야 하는데 기존 dp 로는 이를 구현할 수 없음.
+  
+  => Bit Mask 도입
+
+ 마을이 N 개일 때 N 비트 정수를 사용해 방문한 마을은 1, 방문하지 않은 마을은 0으로 표현할 수 있다.
+
+ ex) 마을이 4개일 때 0000(2) ~ 1111(2) 로 표현가능
+
+ 주어진 상태에서
+ 1. i 번 비트가 0인지 1인지 확인
+ 2. i 번 비트를 1로 바꾸기
+ 3. i 번 비트를 0으로 바꾸기
+ 
+ 3가지 연산이 가능함
+
+ ```  
+ int TSP(int current, int visited) {
+    int& ret = dp[current][visited];
+    if (ret != -1) return ret;
+    // base case : 모든 마을을 방문했을 때
+    if(visited == (1<<N)-1){
+        if(W[current][0]!=0) return W[current][0];
+        return IMPOSSIBLE;
+    }
+    ret = IMPOSSIBLE;
+    for (int i = 0; i < N; i++)
+    {
+        // i 번 마을을 이미 방문했거나 해당 마을로 갈 수 없는 경우
+        if(visited & (1<<i) || W[current][i]==0) continue;
+        // 그 외
+        ret = min(ret, TSP(i, visited | (1<<i)) + W[current][i]);
+    }
+    return ret;
+}
+ ```
