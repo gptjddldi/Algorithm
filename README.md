@@ -329,6 +329,16 @@ for(int i=2; i<=N; i++){
     for(int j=2*i i*j <=N; j+=i)
       arr[j] = 1;
 }
+int sol(int x){
+    notPrime[1] = true;
+    for (int i = 2; i*i <= 1500000; i++)
+    {
+        if(notPrime[i]) continue;
+        for (int j = i*i; j <= 1500000; j+=i)
+        {
+            notPrime[j] = true;
+        }
+    }
 ```
 
 ### 사전순 순열 (Lexicographical Permutation)
