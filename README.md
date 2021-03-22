@@ -481,3 +481,40 @@ void pop() {
 
 }
 ```
+
+### Dijkstra's Algorithm (다익스트라 알고리즘)
+
+> - 한 정점에서 나머지 정점들까지의 최단거리를 구하는 알고리즘
+
+> - 정점의 개수 V, 간선의 개수 E 일 때 시간복잡도 O(ElogV)
+
+#### 방식
+  1. 아직 방문하지 않은 정점들 중 거리가 가장 짧은 정점을 하나 선택해 방문한다
+  2. 해당 정점에서 인접하고 아직 방문하지 않은 정점들의 거리를 갱신한다.
+
+그럼 어떻게 매 반복마다 가장 짧은 정점을 선택하지? '최소힙' 이용
+
+```
+using pii = pair<int, int>;
+int v,e,st;
+vector<pii> ve[20005];
+const int INF = 1e9+10;
+int d[20005];
+void dijkstra(){
+    priority_queue<pii, vector<pii>, greater<pii>> pq;
+    d[st] = 0;
+    pq.push({d[st],st});
+    while(!pq.empty()){
+        auto cur = pq.top(); pq.pop();
+        int dist = cur.first, idx = cur.second;
+        if(d[idx] != dist) continue;
+        for(auto nxt: ve[idx]){
+            int cost = nxt.first, nidx = nxt.second;
+            if(d[nidx] > dist+cost){
+                d[nidx] = dist+cost;
+                pq.push({d[nidx],nidx});
+            }
+        }
+    }
+}
+```
