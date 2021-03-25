@@ -529,3 +529,17 @@ void dijkstra(){
 > - 시간복잡도 O(V^3)
 > - 가중치가 음수일 때도 사용가능
 > - 주어진 그래프에서 모든 정점 쌍 사이의 최단거리를 각각 구하는 알고리즘임
+```
+for (int i = 0; i < m; i++)
+    {
+        int a,b,c;
+        cin>>a>>b>>c;
+        dis[a][b] = min(c, dis[a][b]);
+    }
+    for (int i = 1; i <= n; i++)
+        dis[i][i] = 0;
+    for (int k = 1; k <= n; k++)
+        for (int i = 1; i <= n; i++)
+            for (int j = 1; j <= n; j++)
+                dis[i][j] = min(dis[i][j], dis[i][k] + dis[k][j]);
+```
