@@ -543,3 +543,28 @@ for (int i = 0; i < m; i++)
             for (int j = 1; j <= n; j++)
                 dis[i][j] = min(dis[i][j], dis[i][k] + dis[k][j]);
 ```
+
+### Long Long 자료형보다 큰 값 ADD
+
+> - 각 수를 string 으로 변환해 더해준다.
+```
+string bigNumAdd(string s1, string s2){
+	long long sum = 0;
+	string ret;
+	// 1의 자리부터 더하기 시작
+	while(!s1.empty() || !s2.empty() || sum){
+		if(!s1.empty()){
+			sum += s1.back()-'0';
+			s1.pop_back();
+		}
+		if(!s2.empty()){
+			sum += s2.back()-'0';
+			s2.pop_back();
+		}
+		ret.push_back((sum%10) +'0');
+		sum/=10;
+	}
+	reverse(ret.begin(), ret.end());
+	return ret;
+}
+```
