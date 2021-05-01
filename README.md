@@ -568,3 +568,47 @@ string bigNumAdd(string s1, string s2){
 	return ret;
 }
 ```
+
+### 위상 정렬(Topological Sort)
+
+위상 정렬은 방향이 있는 그래프에서 정점들을 정렬하는 방법이다.
+
+방향 그래프에서 간선으로 주어진 정점간의 선후관계를 위배하지 않도록 정렬한다.
+
+자신에게 들어오는 간선 (Indegree) 이 적은 애들을 먼저 쓰면서.. 정렬하는듯?
+
+여러 개가 존재할 수 있음.. 사이클이 있는 경우 당연히 위상 정렬이 안됨.
+
+> - 1. 맨 처음 모든 간선을 읽으면 Indegree 테이블을 채운다.
+> - 2. Indegree 가 0인 정점들을 모두 큐에 넣는다 (0이 없는 경우는 사이클)(큐에 넣든 스택에 넣든 상관 없음)
+> - 3. 큐의 front 에 있는 정점을 가져와 위상 정렬 리스트에 추가한다.
+> - 4. 해당 정점으로부터 연결된 모든 정점의 Indegree 값을 -1 한다.
+이때 Indegree 가 0이 되었다면 큐에 추가한다.
+> - 5. 큐가 빌 때까지 3,4 번 과정을 반복한다 (만약 큐가 비었는데 탐색 안한 곳이 존재할 경우 사이클임)
+
+```
+// Leet Code <Course Schedule>
+bool canFinish(int numCourses, vector<vector<int>>& ve) {
+        vector<int> graph[numCourses]; // ve 를 그래프로 만듦.
+        unordered_map<int,int> ind;
+        vector<int> v1;
+        queue<int> q;
+        for(auto cur : ve){
+            graph[cur[1]].push_back(cur[0]);
+            ind[cur[0]]++;
+        }
+        
+        for(int i=0; i<numCourses; i++)
+            if(ind[i]==0)
+                q.push(i); // indegree==0 인 index 를 저장함.
+        
+        while(!q.empty()){
+            int cur = q.front(); q.pop();
+            v1.push_back(cur);
+            for(auto nxt : graph[cur]){
+                ind[nxt]--;
+                if(!ind[nxt]) q.push(nxt);
+            }
+        }
+        return v1.size()==numCourses || !ve.size();
+```
