@@ -27,4 +27,5 @@ class Solution:
                     return level
                 maxend = max(maxend, i+nums[i])
             l, r = r+1, maxend
+        
         return level

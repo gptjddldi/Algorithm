@@ -612,3 +612,55 @@ bool canFinish(int numCourses, vector<vector<int>>& ve) {
         }
         return v1.size()==numCourses || !ve.size();
 ```
+
+### Binary Search Tree
+
+Binary Search 와 Linked List 를 결합한 것임.
+
+이진 탐색은 O(logn) 의 시간으로 탐색을 수행하고, Linked List 는 O(1) 의 시간으로 삽입과 삭제를 수행할 수 있음
+
+> - 각 노드의 왼쪽 서브트리에는 해당 노드의 값 보다 작은 노드들만 있다.
+> - 각 노드의 오른쪽 서브트리에는 해당 노드의 값 보다 큰 노드들만 있다.
+> - 중복된 노드는 없다.
+> - 왼쪽 서브트리와 오른쪽 서브트리 역시 BST 이다.
+
+BST 를 순회할 때는 중위순회(inorder) 방식을 사용하는데, 중위순회를 실시하면 BST 의 모든 값들을 정렬된 순서로 탐색할 수 있다.
+
+### Quick Sort
+
+예전에 이해가 안돼서 넘긴 퀵소트다.
+
+분할 정복 알고리즘으로, 평균 O(nlogn) 최악 O(N^2) 의 복잡도를 가진다.
+
+> - 리스트 에서 요소를 선택, 어떤 요소를 선택하느냐에 시간복잡도가 달라질 수 있음 (pivot)
+> - pivot 을 기준으로 작은 값은 왼쪽, 큰 값은 오른 쪽으로 옮겨짐
+> - 왼쪽 리스트와, 오른쪽 리스트에 대하여 다시 처음 실행
+
+```
+int partition(vector<int>& arr, int left, int right){
+  int pivot = arr[left]; // pivot : 첫 번째 원소
+  int i = left, j = right;
+  
+  while(i<j){
+    while(pivot < arr[j]) j--;
+    while(i<j && pivot >= arr[i]) i++;
+
+    swap(arr[i], arr[j]);
+    swap(i,j);
+  }
+  arr[left] = arr[i];
+  arr[i] = pivot;
+  return i;
+}
+
+void quick_sort(vector<int>& arr, int left, int right){
+  if (left >= right) return;
+  int pivot = partition(arr, left, right);
+  
+  quick_sort(arr, left, pivot-1);
+  quick_sort(arr, pivot+1, right);
+}
+
+
+
+```
